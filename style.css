@@ -36,6 +36,11 @@ body {
   width: 100%;
   height: 100%;
   z-index: 0;
+  transition: z-index 0s;
+}
+
+#space.interactive {
+  z-index: 2;
 }
 
 .book-tooltip {
@@ -362,32 +367,12 @@ ul { list-style: none; }
   flex-direction: column;
   justify-content: space-between;
   pointer-events: none;
-  touch-action: none;
 }
 
-.planet-explore-section.active {
-  pointer-events: none;
-  touch-action: none;
-}
-
-body.planet-locked {
-  overflow: hidden !important;
-  touch-action: none !important;
-}
-
-body.planet-locked .scroll-container {
-  touch-action: none !important;
-}
-
-.planet-scroll-btn {
-  display: none;
+.planet-explore-section .planet-explore-ui,
+.planet-explore-section .planet-explore-hint,
+.planet-explore-section .planet-scroll-btn {
   pointer-events: auto;
-}
-
-@media (max-width: 900px) {
-  .planet-scroll-btn {
-    display: inline-flex;
-  }
 }
 
 .planet-explore-section .planet-explore-ui,
