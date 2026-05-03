@@ -81,7 +81,15 @@ img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 
-/* ─── HEADER ─── */
+.panel {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7rem 2rem 4rem;
+  overflow: hidden;
+  position: relative;
+}
 .site-header {
   position: fixed;
   top: 0;
@@ -150,14 +158,6 @@ ul { list-style: none; }
 }
 
 /* ─── PANELS ─── */
-.panel {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 7rem 2rem 4rem;
-}
-
 .panel > div {
   max-width: var(--max-width);
   width: 100%;
@@ -832,6 +832,10 @@ blockquote {
 
 @media (min-width: 768px) {
   .section-glow { display: block; }
+}
+
+section[style*="position:relative"] {
+  clip-path: inset(0);
 }
 
 /* ─── RESPONSIVE ─── */

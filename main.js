@@ -407,10 +407,10 @@ document.addEventListener('mousedown', (e) => {
 document.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
 document.addEventListener('mouseup', (e) => handleUp(e.clientX, e.clientY));
 
-canvas.addEventListener('touchstart', (e) => {
+document.addEventListener('touchstart', (e) => {
   if (e.touches.length === 1) {
-    e.preventDefault();
     handleDown(e.touches[0].clientX, e.touches[0].clientY, true);
+    if (isDragging) e.preventDefault();
   }
 }, { passive: false });
 document.addEventListener('touchmove', (e) => {
