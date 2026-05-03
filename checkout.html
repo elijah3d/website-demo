@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout - Nadwismar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .checkout-layout { display: flex; gap: 3rem; align-items: flex-start; }
+    .checkout-form { flex: 1; min-width: 0; }
+    .checkout-summary { flex: 0 0 340px; }
+    .checkout-section { margin-bottom: 2rem; }
+    .checkout-section h3 { font-family: var(--body-font); font-size: 1rem; font-weight: 600; color: var(--text-bright); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--surface-border); }
+    .form-row { display: flex; gap: 1rem; margin-bottom: 1rem; }
+    .form-row > div { flex: 1; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 500; color: var(--text-muted); margin-bottom: 0.4rem; }
+    .form-group input, .form-group select { width: 100%; background: var(--surface); border: 1px solid var(--surface-border); border-radius: 6px; padding: 0.7rem 0.9rem; color: var(--text); font-family: var(--body-font); font-size: 0.9rem; transition: border-color 0.3s; }
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--purple); }
+    .form-group input::placeholder { color: rgba(200,195,220,0.35); }
+    .summary-card { background: var(--surface); border: 1px solid var(--surface-border); border-radius: 10px; padding: 1.5rem; position: sticky; top: 5.5rem; }
+    .summary-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid rgba(157,0,255,0.06); }
+    .summary-item:last-of-type { border-bottom: none; }
+    .summary-item img { width: 44px; height: auto; border-radius: 4px; }
+    .summary-item-info { flex: 1; min-width: 0; }
+    .summary-item-info h4 { font-size: 0.8rem; font-weight: 500; color: var(--text-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .summary-item-info span { font-size: 0.75rem; color: var(--text-muted); }
+    .summary-item-price { font-size: 0.85rem; font-weight: 600; color: var(--text-bright); white-space: nowrap; }
+    .summary-total { display: flex; justify-content: space-between; padding: 1rem 0 0; margin-top: 0.5rem; border-top: 2px solid var(--surface-border); }
+    .summary-total span:first-child { font-weight: 600; color: var(--text-bright); }
+    .summary-total span:last-child { font-size: 1.15rem; font-weight: 700; color: var(--purple); }
+    .card-element-container { background: var(--surface); border: 1px solid var(--surface-border); border-radius: 6px; padding: 0.75rem 0.9rem; min-height: 44px; transition: border-color 0.3s; }
+    .card-element-container.StripeElement--focus { border-color: var(--purple); }
+    .card-element-container.StripeElement--invalid { border-color: #ff4466; }
+    .pay-btn { width: 100%; margin-top: 1.25rem; font-size: 1rem; padding: 1rem; position: relative; }
+    .pay-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .pay-btn .spinner { display: none; width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; margin: 0 auto; }
+    .pay-btn.loading .btn-text { display: none; }
+    .pay-btn.loading .spinner { display: block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .checkout-empty { text-align: center; padding: 3rem 1rem; }
+    .checkout-empty p { color: var(--text-muted); margin-bottom: 1.5rem; }
+    .card-errors { color: #ff4466; font-size: 0.8rem; margin-top: 0.5rem; min-height: 1.2em; }
+    .lock-icon { font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 0.75rem; }
+    @media (max-width: 900px) {
+      .checkout-layout { flex-direction: column; }
+      .checkout-summary { flex: 0 0 auto; width: 100%; }
+      .summary-card { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="space"></canvas>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="https://nadwismar.com/wp-content/uploads/2024/08/Nadwismar-logo.png" alt="Nadwismar" />
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="shop.html">Shop</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="contact.html">Contact Me</a>
+      </nav>
+      <a href="cart.html" class="nav-cart" aria-label="Cart" style="position:relative;">&#128722;<span class="cart-count" style="position:absolute;top:-6px;right:-10px;background:var(--purple);color:#fff;font-size:0.65rem;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center;font-weight:600;">0</span></a>
+      <button class="mobile-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="scroll-container">
+
+    <section class="panel">
+      <div style="max-width:1000px;width:100%;">
+        <span class="section-label center" data-animate="fade-down">Checkout</span>
+        <h2 class="section-heading center" data-animate="fade-down" data-delay="2">Complete Your Order</h2>
+
+        <div id="checkoutContent" data-animate="fade-up" data-delay="3"></div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <a href="index.html">
+              <img src="https://nadwismar.com/wp-content/uploads/2024/08/Nadwismar-logo.png" alt="Nadwismar" class="footer-logo" />
+            </a>
+          </div>
+          <div class="footer-col">
+            <h5>Helpful</h5>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Me</a></li>
+              <li><a href="shop.html">Shop</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Useful</h5>
+            <ul>
+              <li><a href="cart.html">Cart</a></li>
+              <li><a href="checkout.html">Checkout</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms &amp; Conditions</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Contact Information</h5>
+            <ul>
+              <li><a href="mailto:nadwismar@gmail.com">nadwismar@gmail.com</a></li>
+              <li><a href="#">+31 6 57704657</a></li>
+            </ul>
+            <div class="social-links">
+              <a href="https://www.tiktok.com/@nad.wismar" target="_blank" rel="noopener">TikTok</a>
+              <a href="https://t.me/nadwismarwriter" target="_blank" rel="noopener">Telegram</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>Copyright &copy; 2024 | <strong>NadWismar</strong> | All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <img id="book-tex-0" src="assets/glowing-earth.png" style="display:none" alt="">
+  <img id="book-tex-1" src="assets/dimensions.png" style="display:none" alt="">
+  <img id="book-tex-2" src="assets/too-good.png" style="display:none" alt="">
+  <img id="book-tex-3" src="assets/little-star.png" style="display:none" alt="">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="cart-system.js"></script>
+  <script src="main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var container = document.getElementById('checkoutContent');
+      var items = NadCart.getItems();
+
+      if (items.length === 0) {
+        container.innerHTML = '<div class="checkout-empty"><p>Your cart is empty. Add some books before checking out.</p><a href="shop.html" class="btn btn-primary">Browse Books</a></div>';
+        return;
+      }
+
+      var summaryHTML = '<div class="checkout-layout"><div class="checkout-form">';
+      summaryHTML += '<form id="checkoutForm">';
+
+      summaryHTML += '<div class="checkout-section"><h3>Contact Information</h3>';
+      summaryHTML += '<div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" placeholder="you@example.com" required /></div>';
+      summaryHTML += '</div>';
+
+      summaryHTML += '<div class="checkout-section"><h3>Shipping Information</h3>';
+      summaryHTML += '<div class="form-row"><div class="form-group"><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName" placeholder="John" required /></div><div class="form-group"><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName" placeholder="Doe" required /></div></div>';
+      summaryHTML += '<div class="form-group"><label for="address">Address</label><input type="text" id="address" name="address" placeholder="123 Main St" required /></div>';
+      summaryHTML += '<div class="form-row"><div class="form-group"><label for="city">City</label><input type="text" id="city" name="city" placeholder="Amsterdam" required /></div><div class="form-group"><label for="postcode">Postal Code</label><input type="text" id="postcode" name="postcode" placeholder="1012 AB" required /></div></div>';
+      summaryHTML += '<div class="form-group"><label for="country">Country</label><select id="country" name="country" required><option value="NL">Netherlands</option><option value="DE">Germany</option><option value="BE">Belgium</option><option value="FR">France</option><option value="ES">Spain</option><option value="IT">Italy</option><option value="GB">United Kingdom</option><option value="US">United States</option><option value="CA">Canada</option><option value="AU">Australia</option><option value="JP">Japan</option><option value="">Other</option></select></div>';
+      summaryHTML += '</div>';
+
+      summaryHTML += '<div class="checkout-section"><h3>Payment</h3>';
+      summaryHTML += '<div class="card-element-container" id="cardElement"></div>';
+      summaryHTML += '<div class="card-errors" id="cardErrors"></div>';
+      summaryHTML += '</div>';
+
+      summaryHTML += '<button type="submit" class="btn btn-primary pay-btn" id="payButton"><span class="btn-text">Pay &euro;' + NadCart.getTotal().toFixed(2) + '</span><div class="spinner"></div></button>';
+      summaryHTML += '</form></div>';
+
+      summaryHTML += '<div class="checkout-summary"><div class="summary-card"><h3 style="font-family:var(--body-font);font-size:0.9rem;font-weight:600;color:var(--text-bright);margin-bottom:1rem;">Order Summary</h3>';
+
+      items.forEach(function(item) {
+        var p = NadCart.getProduct(item.id);
+        if (!p) return;
+        summaryHTML += '<div class="summary-item"><img src="' + p.image + '" alt="' + p.name + '" /><div class="summary-item-info"><h4>' + p.name + '</h4><span>Qty: ' + item.qty + '</span></div><span class="summary-item-price">&euro;' + (p.price * item.qty).toFixed(2) + '</span></div>';
+      });
+
+      summaryHTML += '<div class="summary-total"><span>Total</span><span>&euro;' + NadCart.getTotal().toFixed(2) + '</span></div>';
+      summaryHTML += '<div class="lock-icon">&#128274; Secure payment powered by Stripe</div>';
+      summaryHTML += '</div></div></div>';
+
+      container.innerHTML = summaryHTML;
+
+      var stripeKey = document.querySelector('meta[name="stripe-key"]');
+      if (stripeKey && stripeKey.content) {
+        initStripe(stripeKey.content);
+      } else {
+        var cardEl = document.getElementById('cardElement');
+        if (cardEl) {
+          cardEl.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem;padding:0.5rem 0;">Stripe is not configured. Add your Stripe publishable key to enable payments.</p><p style="color:var(--text-muted);font-size:0.75rem;margin-top:0.5rem;">See checkout.html source for setup instructions.</p>';
+        }
+      }
+    });
+
+    function initStripe(publishableKey) {
+      var stripe = Stripe(publishableKey);
+      var elements = stripe.elements();
+      var card = elements.create('card', {
+        style: {
+          base: { color: '#d8d4e8', fontFamily: "'Inter', sans-serif", fontSize: '15px', '::placeholder': { color: 'rgba(200,195,220,0.35)' } },
+          invalid: { color: '#ff4466' },
+        },
+      });
+      card.mount('#cardElement');
+      card.addEventListener('change', function(e) {
+        var errEl = document.getElementById('cardErrors');
+        errEl.textContent = e.error ? e.error.message : '';
+      });
+
+      var form = document.getElementById('checkoutForm');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = document.getElementById('payButton');
+        btn.classList.add('loading');
+        btn.disabled = true;
+
+        var firstName = document.getElementById('firstName').value;
+        var lastName = document.getElementById('lastName').value;
+
+        stripe.createToken(card, {
+          name: firstName + ' ' + lastName,
+          address_line1: document.getElementById('address').value,
+          address_city: document.getElementById('city').value,
+          address_zip: document.getElementById('postcode').value,
+          address_country: document.getElementById('country').value,
+        }).then(function(result) {
+          if (result.error) {
+            var errEl = document.getElementById('cardErrors');
+            errEl.textContent = result.error.message;
+            btn.classList.remove('loading');
+            btn.disabled = false;
+          } else {
+            NadCart.clearCart();
+            window.location.href = 'checkout-success.html';
+          }
+        });
+      });
+    }
+  </script>
+</body>
+</html>

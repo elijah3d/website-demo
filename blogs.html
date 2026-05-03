@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog - Nadwismar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      max-width: var(--max-width);
+      width: 100%;
+      margin: 2.5rem auto 0;
+    }
+    .blog-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 10px;
+      padding: 1.75rem;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 320px;
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(157, 0, 255, 0.3);
+      box-shadow: 0 12px 40px rgba(157, 0, 255, 0.1);
+    }
+    .blog-category {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--purple);
+      border: 1px solid rgba(157, 0, 255, 0.25);
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+    .blog-card h3 {
+      font-family: var(--body-font);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-bright);
+      line-height: 1.45;
+      margin-bottom: 0.75rem;
+    }
+    .blog-card h3 a {
+      color: var(--text-bright);
+      transition: color 0.3s;
+    }
+    .blog-card h3 a:hover {
+      color: var(--purple);
+    }
+    .blog-excerpt {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+    .blog-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--surface-border);
+      padding-top: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .blog-meta .blog-author {
+      color: var(--purple);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="space"></canvas>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="https://nadwismar.com/wp-content/uploads/2024/08/Nadwismar-logo.png" alt="Nadwismar" />
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="shop.html">Shop</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="contact.html">Contact Me</a>
+      </nav>
+      <a href="cart.html" class="nav-cart" aria-label="Cart" style="position:relative;">&#128722;<span class="cart-count" style="position:absolute;top:-6px;right:-10px;background:var(--purple);color:#fff;font-size:0.65rem;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center;font-weight:600;">0</span></a>
+      <button class="mobile-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="scroll-container">
+
+    <section class="panel">
+      <div>
+        <span class="section-label center" data-animate="fade-down" data-delay="1">Blog</span>
+        <h2 class="section-heading center" data-animate="fade-down" data-delay="2">Latest Articles</h2>
+      </div>
+    </section>
+
+    <section class="panel" style="position:relative;align-items:flex-start;">
+      <div class="section-glow" style="top:-100px;right:-100px;"></div>
+      <div style="max-width:var(--max-width);width:100%;">
+        <div class="blog-grid">
+
+          <div class="blog-card" data-animate="fade-up" data-delay="1">
+            <div>
+              <span class="blog-category">Featured Books</span>
+              <h3><a href="#">Discover the Magic of 'Tell Me More My Little Star' – A Story for Dreamers Everywhere</a></h3>
+              <p class="blog-excerpt">What makes a story unforgettable? It's the way it touches your heart, inspires your dreams, and leaves you with...</p>
+            </div>
+            <div class="blog-meta">
+              <span class="blog-author">devcat</span>
+              <span>November 20, 2024</span>
+            </div>
+          </div>
+
+          <div class="blog-card" data-animate="fade-up" data-delay="2">
+            <div>
+              <span class="blog-category">Featured Books</span>
+              <h3><a href="#">'Tell Me More My Little Star' – A Heartwarming Tale of Dreams and Imagination</a></h3>
+              <p class="blog-excerpt">Have you ever wondered what it feels like to touch the stars? Or how dreams can take us to...</p>
+            </div>
+            <div class="blog-meta">
+              <span class="blog-author">devcat</span>
+              <span>November 20, 2024</span>
+            </div>
+          </div>
+
+          <div class="blog-card" data-animate="fade-up" data-delay="3">
+            <div>
+              <span class="blog-category">Featured Books</span>
+              <h3><a href="#">Why 'Too Good to Be Bad? Too Bad to Be Good?' Is a Book You Can't Miss – A Deep Dive into Human Complexity</a></h3>
+              <p class="blog-excerpt">What defines a good person? What separates the 'good' from the 'bad'? Too Goods to Be Bad? Too Bad...</p>
+            </div>
+            <div class="blog-meta">
+              <span class="blog-author">devcat</span>
+              <span>November 17, 2024</span>
+            </div>
+          </div>
+
+          <div class="blog-card" data-animate="fade-up" data-delay="4">
+            <div>
+              <span class="blog-category">Nadwismer</span>
+              <h3><a href="#">Exploring the Complex World of 'Too Good to Be Bad? Too Bad to Be Good?' – A Must-Read Journey into Human Nature</a></h3>
+              <p class="blog-excerpt">Are you ready to dive into a captivating journey that blurs the lines between good and bad, challenging everything...</p>
+            </div>
+            <div class="blog-meta">
+              <span class="blog-author">devcat</span>
+              <span>November 17, 2024</span>
+            </div>
+          </div>
+
+          <div class="blog-card" data-animate="fade-up" data-delay="5">
+            <div>
+              <span class="blog-category">Featured Books</span>
+              <h3><a href="#">The Power of Dreams: How 'Tell Me More, My Little Star' Came to Life</a></h3>
+              <p class="blog-excerpt">Have you ever had a dream so vivid and realistic that it lingered with you long after you woke up?</p>
+            </div>
+            <div class="blog-meta">
+              <span class="blog-author">devcat</span>
+              <span>August 2, 2024</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <a href="index.html">
+              <img src="https://nadwismar.com/wp-content/uploads/2024/08/Nadwismar-logo.png" alt="Nadwismar" class="footer-logo" />
+            </a>
+          </div>
+          <div class="footer-col">
+            <h5>Helpful</h5>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Me</a></li>
+              <li><a href="shop.html">Shop</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Useful</h5>
+            <ul>
+              <li><a href="cart.html">Cart</a></li>
+              <li><a href="checkout.html">Checkout</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms &amp; Conditions</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Contact Information</h5>
+            <ul>
+              <li><a href="mailto:nadwismar@gmail.com">nadwismar@gmail.com</a></li>
+              <li><a href="#">+31 6 57704657</a></li>
+            </ul>
+            <div class="social-links">
+              <a href="https://www.tiktok.com/@nad.wismar" target="_blank" rel="noopener">TikTok</a>
+              <a href="https://t.me/nadwismarwriter" target="_blank" rel="noopener">Telegram</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>Copyright &copy; 2024 | <strong>NadWismar</strong> | All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <img id="book-tex-0" src="assets/glowing-earth.png" style="display:none" alt="">
+  <img id="book-tex-1" src="assets/dimensions.png" style="display:none" alt="">
+  <img id="book-tex-2" src="assets/too-good.png" style="display:none" alt="">
+  <img id="book-tex-3" src="assets/little-star.png" style="display:none" alt="">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="cart-system.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart - Nadwismar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .cart-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+    .cart-table th { text-align: left; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; padding: 1rem 0.75rem; border-bottom: 1px solid var(--surface-border); }
+    .cart-table td { padding: 1rem 0.75rem; border-bottom: 1px solid rgba(157, 0, 255, 0.06); vertical-align: middle; }
+    .cart-item-info { display: flex; align-items: center; gap: 1rem; }
+    .cart-item-info img { width: 60px; height: auto; border-radius: 4px; }
+    .cart-item-info h4 { font-size: 0.9rem; font-weight: 500; color: var(--text-bright); }
+    .cart-qty { display: flex; align-items: center; gap: 0.5rem; }
+    .cart-qty button { width: 30px; height: 30px; border-radius: 6px; background: var(--surface); border: 1px solid var(--surface-border); color: var(--text); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .cart-qty button:hover { border-color: var(--purple); color: var(--purple); }
+    .cart-qty span { min-width: 24px; text-align: center; font-weight: 500; }
+    .cart-remove { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.85rem; transition: color 0.2s; padding: 4px; }
+    .cart-remove:hover { color: #ff4466; }
+    .cart-total-row { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 0; border-top: 2px solid var(--surface-border); margin-top: 0.5rem; }
+    .cart-total-label { font-size: 1rem; font-weight: 600; color: var(--text-bright); }
+    .cart-total-price { font-size: 1.3rem; font-weight: 700; color: var(--purple); }
+    .cart-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; gap: 1rem; flex-wrap: wrap; }
+    .cart-empty { text-align: center; padding: 3rem 1rem; }
+    .cart-empty p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 1rem; }
+    .cart-price-cell { font-weight: 600; color: var(--text-bright); white-space: nowrap; }
+    @media (max-width: 600px) {
+      .cart-table thead { display: none; }
+      .cart-table tr { display: flex; flex-wrap: wrap; padding: 1rem 0; border-bottom: 1px solid var(--surface-border); gap: 0.5rem; align-items: center; }
+      .cart-table td { border: none; padding: 0.25rem 0; }
+      .cart-table td:first-child { flex: 1 1 100%; }
+      .cart-table td:nth-child(2) { flex: 0; }
+      .cart-table td:nth-child(3) { flex: 1; text-align: right; }
+      .cart-table td:nth-child(4) { flex: 0; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="space"></canvas>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="https://nadwismar.com/wp-content/uploads/2024/08/Nadwismar-logo.png" alt="Nadwismar" />
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="shop.html">Shop</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="contact.html">Contact Me</a>
+      </nav>
+      <a href="cart.html" class="nav-cart" aria-label="Cart" style="position:relative;">&#128722;<span class="cart-count" style="position:absolute;top:-6px;right:-10px;background:var(--purple);color:#fff;font-size:0.65rem;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center;font-weight:600;">0</span></a>
+      <button class="mobile-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="scroll-container">
+
+    <section class="panel">
+      <div style="max-width:900px;width:100%;">
+        <span class="section-label center" data-animate="fade-down">Cart</span>
+        <h2 class="section-heading center" data-animate="fade-down" data-delay="2">Your Shopping Cart</h2>
+
+        <div id="cartContent" data-animate="fade-up" data-delay="3"></div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <a href="index.html">
+              <img src="https://nadwismar.com/wp-content/uploads/2024/08/Nadwismar-logo.png" alt="Nadwismar" class="footer-logo" />
+            </a>
+          </div>
+          <div class="footer-col">
+            <h5>Helpful</h5>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Me</a></li>
+              <li><a href="shop.html">Shop</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Useful</h5>
+            <ul>
+              <li><a href="cart.html">Cart</a></li>
+              <li><a href="checkout.html">Checkout</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms &amp; Conditions</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Contact Information</h5>
+            <ul>
+              <li><a href="mailto:nadwismar@gmail.com">nadwismar@gmail.com</a></li>
+              <li><a href="#">+31 6 57704657</a></li>
+            </ul>
+            <div class="social-links">
+              <a href="https://www.tiktok.com/@nad.wismar" target="_blank" rel="noopener">TikTok</a>
+              <a href="https://t.me/nadwismarwriter" target="_blank" rel="noopener">Telegram</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>Copyright &copy; 2024 | <strong>NadWismar</strong> | All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <img id="book-tex-0" src="assets/glowing-earth.png" style="display:none" alt="">
+  <img id="book-tex-1" src="assets/dimensions.png" style="display:none" alt="">
+  <img id="book-tex-2" src="assets/too-good.png" style="display:none" alt="">
+  <img id="book-tex-3" src="assets/little-star.png" style="display:none" alt="">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="cart-system.js"></script>
+  <script src="main.js"></script>
+  <script>
+    function renderCart() {
+      var container = document.getElementById('cartContent');
+      var items = NadCart.getItems();
+
+      if (items.length === 0) {
+        container.innerHTML = '<div class="cart-empty"><p>Your cart is currently empty.</p><a href="shop.html" class="btn btn-primary">Browse Books</a></div>';
+        return;
+      }
+
+      var html = '<table class="cart-table"><thead><tr><th>Product</th><th>Quantity</th><th>Price</th><th></th></tr></thead><tbody>';
+
+      items.forEach(function(item) {
+        var p = NadCart.getProduct(item.id);
+        if (!p) return;
+        html += '<tr data-id="' + item.id + '">';
+        html += '<td><div class="cart-item-info"><img src="' + p.image + '" alt="' + p.name + '" /><h4>' + p.name + '</h4></div></td>';
+        html += '<td><div class="cart-qty"><button onclick="changeQty(\'' + item.id + '\', -1)">&minus;</button><span>' + item.qty + '</span><button onclick="changeQty(\'' + item.id + '\', 1)">+</button></div></td>';
+        html += '<td class="cart-price-cell">&euro;' + (p.price * item.qty).toFixed(2) + '</td>';
+        html += '<td><button class="cart-remove" onclick="removeItem(\'' + item.id + '\')">&#10005;</button></td>';
+        html += '</tr>';
+      });
+
+      html += '</tbody></table>';
+      html += '<div class="cart-total-row"><span class="cart-total-label">Total</span><span class="cart-total-price">&euro;' + NadCart.getTotal().toFixed(2) + '</span></div>';
+      html += '<div class="cart-actions"><a href="shop.html" class="btn btn-outline">Continue Shopping</a><a href="checkout.html" class="btn btn-primary">Proceed to Checkout</a></div>';
+
+      container.innerHTML = html;
+    }
+
+    function changeQty(id, delta) {
+      var items = NadCart.getItems();
+      var item = items.find(function(i) { return i.id === id; });
+      if (item) {
+        var newQty = item.qty + delta;
+        if (newQty < 1) { NadCart.removeItem(id); }
+        else { NadCart.updateQty(id, newQty); }
+      }
+      renderCart();
+    }
+
+    function removeItem(id) {
+      NadCart.removeItem(id);
+      renderCart();
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCart);
+  </script>
+</body>
+</html>

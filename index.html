@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Where Dreams and Stories Come to Life - Nadwismar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="space"></canvas>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="https://nadwismar.com/wp-content/uploads/2024/08/Nadwismar-logo.png" alt="Nadwismar" />
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="shop.html">Shop</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="contact.html">Contact Me</a>
+      </nav>
+      <a href="cart.html" class="nav-cart" aria-label="Cart" style="position:relative;">&#128722;<span class="cart-count" style="position:absolute;top:-6px;right:-10px;background:var(--purple);color:#fff;font-size:0.65rem;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center;font-weight:600;">0</span></a>
+      <button class="mobile-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="popup-overlay" id="promoPopup">
+    <div class="popup-card">
+      <button class="popup-close" id="popupClose" aria-label="Close">&times;</button>
+      <div class="popup-inner">
+        <img src="https://nadwismar.com/wp-content/uploads/2026/04/uZPT3lBS7CGD.png" alt="Dimensions" class="popup-book" />
+        <div class="popup-body">
+          <span class="section-label">New Release</span>
+          <h3>Dimensions</h3>
+          <p class="popup-subtitle">Book 2 of The Glowing Earth</p>
+          <p>After the discovery of cosmic strings carrying a hidden message, scientist Laura is thrust into a multidimensional war between two universes.</p>
+          <a href="#" data-add-cart="dimensions" class="btn btn-primary">Pre Order Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-container">
+
+    <section class="panel hero-section">
+      <div class="hero-inner">
+        <div class="hero-text" data-animate="fade-right">
+          <span class="hero-label" data-animate="fade-up" data-delay="1">Welcome to the World of Nadwismar</span>
+          <h1 class="hero-title" data-animate="fade-up" data-delay="2">Where Dreams and Stories Come to Life</h1>
+          <p class="hero-desc" data-animate="fade-up" data-delay="3">Experience imaginative stories that inspire and entertain. Nad Wismar's books take you on heartfelt journeys to worlds of endless wonder.</p>
+          <a href="shop.html" class="btn btn-primary" data-animate="fade-up" data-delay="4">Discover the Books</a>
+        </div>
+        <div class="hero-image" data-animate="zoom-in" data-delay="2">
+          <img src="https://nadwismar.com/wp-content/uploads/2024/08/Ebook-mockup-1.png" alt="Dreams stories" data-parallax="0.03" />
+        </div>
+      </div>
+    </section>
+
+    <section class="panel about-section" style="position:relative;">
+      <div class="section-glow" style="top:-100px;left:-100px;"></div>
+      <div class="about-inner">
+        <div class="about-text" data-animate="fade-right">
+          <span class="section-label" data-animate="fade-up" data-delay="1">About Me</span>
+          <h2 class="section-heading" data-animate="fade-up" data-delay="2">Nad Wismar</h2>
+          <p data-animate="fade-up" data-delay="3">I was born in Germany in a small village Wismar. That's why my pseudonym is Wismar and the first name is Nad, which is Nadia's shortened version. I moved to Paris when I was 16 years old to start living my adult life, and to work and socialize with different cultures.</p>
+          <p data-animate="fade-up" data-delay="4">My first career was in fashion and modeling. I traveled to the USA, Japan, Argentina, Spain, Italy, Germany, Morocco, Belgium and France. Then I worked as a business assistant and a copywriter writing articles about art, fashion, and technology.</p>
+          <p data-animate="fade-up" data-delay="5">I realised that writing gives me a feeling of self-fulfilment and a connection with something magical and powerful. I transfer this positive energy through my books to readers. Currently I live in the Netherlands and work at the company as a manager. One of the most inspirational place for me is Seychelles.</p>
+          <h4 class="books-label" data-animate="fade-up" data-delay="6">Popular Selling Books</h4>
+          <div class="book-row" data-animate="fade-up" data-delay="7">
+            <img src="https://nadwismar.com/wp-content/uploads/2024/08/eeefea10-2c66-466e-b034-120b00673ccc-removebg-preview.png" alt="Glowing Earth" />
+            <img src="https://nadwismar.com/wp-content/uploads/2024/08/eeefea10-2c66-466e-b034-120b00673ccc__1_-removebg-preview.png" alt="Too Good to Be Bad" />
+          </div>
+          <div class="book-row" data-animate="fade-up" data-delay="8">
+            <img src="https://nadwismar.com/wp-content/uploads/2026/04/uZPT3lBS7CGD-963x1024.png" alt="Dimensions" />
+            <img src="https://nadwismar.com/wp-content/uploads/2024/08/1ebook.png" alt="A Dreamer's Tale" />
+          </div>
+        </div>
+        <div class="about-photo" data-animate="fade-left" data-delay="3">
+          <img src="https://nadwismar.com/wp-content/uploads/2024/08/1b635b29-d1be-44ee-9fc7-41bc67500dc7.jpeg" alt="Nad Wismar" data-parallax="0.04" />
+        </div>
+      </div>
+    </section>
+
+    <section class="panel planet-explore-section" id="section-planet">
+      <div class="planet-explore-ui">
+        <span class="section-label center" data-animate="fade-down" data-delay="1">The Glowing Earth</span>
+        <h2 class="section-heading center" data-animate="fade-down" data-delay="2">Explore the Library</h2>
+      </div>
+      <div class="planet-explore-hint" id="planetHint">
+        <span>Hold &amp; drag to rotate &bull; Click a book to explore</span>
+      </div>
+    </section>
+    <div class="book-tooltip" id="bookTooltip"></div>
+
+    <section class="panel books-section" style="position:relative;">
+      <div class="section-glow" style="bottom:-80px;right:-80px;"></div>
+      <div class="books-inner">
+        <span class="section-label center" data-animate="fade-down" data-delay="1">Featured eBooks</span>
+        <h2 class="section-heading center" data-animate="fade-down" data-delay="2">Explore Nad's Stories</h2>
+        <p class="section-desc center" data-animate="fade-up" data-delay="3">Dive into the imaginative worlds created by Nad Wismar. Each ebook offers a unique journey, whether it's exploring the depths of human emotion, venturing into the unknown, or finding inspiration in the stars.</p>
+        <div class="products-grid">
+          <div class="product-card" data-animate="fade-up" data-delay="1">
+            <a href="product-dimensions.html">
+              <img src="https://nadwismar.com/wp-content/uploads/2026/04/uZPT3lBS7CGD.png" alt="Dimensions" />
+            </a>
+            <h3>Book 2 "Dimensions" the series The Glowing Earth:</h3>
+            <span class="price">&euro;10.00</span>
+            <a href="#" data-add-cart="dimensions" class="btn btn-small">Add to cart</a>
+          </div>
+          <div class="product-card" data-animate="fade-up" data-delay="2">
+            <a href="product-too-good.html">
+              <img src="https://nadwismar.com/wp-content/uploads/2024/08/Untitled_design__3_-removebg-preview.png" alt="Too Good to Be Bad" />
+            </a>
+            <h3>Too Good to Be Bad? Too Bad to Be Good?</h3>
+            <span class="price">&euro;7.00</span>
+            <a href="#" data-add-cart="too-good" class="btn btn-small">Add to cart</a>
+          </div>
+          <div class="product-card" data-animate="fade-up" data-delay="3">
+            <a href="product-little-star.html">
+              <img src="https://nadwismar.com/wp-content/uploads/2024/08/Tell-Me-More-My-Little-Star.png" alt="Tell Me More My Little Star" />
+            </a>
+            <h3>Tell Me More My Little Star</h3>
+            <span class="price">&euro;3.00</span>
+            <a href="#" data-add-cart="little-star" class="btn btn-small">Add to cart</a>
+          </div>
+          <div class="product-card" data-animate="fade-up" data-delay="4">
+            <a href="product-glowing-earth.html">
+              <img src="https://nadwismar.com/wp-content/uploads/2024/08/Untitled_design__4_-removebg-preview.png" alt="The Glowing Earth" />
+            </a>
+            <h3>The Glowing Earth</h3>
+            <span class="price">&euro;6.00</span>
+            <a href="#" data-add-cart="glowing-earth" class="btn btn-small">Add to cart</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel release-section" style="position:relative;">
+      <div class="section-glow" style="top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+      <div class="release-inner">
+        <div class="release-text" data-animate="fade-right" data-delay="1">
+          <span class="release-badge" data-animate="fade-up" data-delay="2">NEW RELEASE &bull; BOOK 2</span>
+          <h2 class="release-title" data-animate="fade-up" data-delay="3">DIMENSIONS</h2>
+          <span class="release-subtitle" data-animate="fade-up" data-delay="4">Book 2 of The Glowing Earth</span>
+          <p data-animate="fade-up" data-delay="5">After the discovery of the strings carrying a hidden message, scientist Laura and her team are thrust into a multidimensional war between two universes&mdash;one ruled by pure energy beings and the other consumed by dark energy and artificial intelligence. Science, love, and human consciousness become the only forces that can save all Universes from annihilation.</p>
+          <a href="#" data-add-cart="dimensions" class="btn btn-primary" data-animate="fade-up" data-delay="6">Pre Order Now</a>
+        </div>
+        <div class="release-image" data-animate="zoom-in" data-delay="3" data-duration="slow">
+          <img src="https://nadwismar.com/wp-content/uploads/2026/04/uZPT3lBS7CGD-1.png" alt="Dimensions Book Cover" data-parallax="0.05" />
+        </div>
+      </div>
+    </section>
+
+    <section class="panel story-section">
+      <div class="story-inner">
+        <div class="story-image" data-animate="zoom-in" data-delay="2">
+          <img src="https://nadwismar.com/wp-content/uploads/2024/12/IMG_7647.png" alt="Nadwismar" data-parallax="0.04" />
+        </div>
+        <div class="story-text" data-animate="fade-left" data-delay="1">
+          <span class="section-label" data-animate="fade-up" data-delay="2">When Characters Come to Life</span>
+          <h2 class="section-heading" data-animate="fade-up" data-delay="3">Writing My Story: The Journey Behind The Glowing Earth</h2>
+          <p data-animate="fade-up" data-delay="4">"When I began writing <em>The Glowing Earth</em>, it felt as if the characters were calling out to me, asking for their stories to be told. Holding this book in my hands today, I am reminded that dreams, no matter how distant, are always worth pursuing.</p>
+          <p data-animate="fade-up" data-delay="5">From living across continents to finding my voice here in Oss, this novel marks the beginning of an extraordinary journey&mdash;one that blends imagination, hope, and adventure. <em>The Glowing Earth</em> is not just a story; it is a piece of my heart shared with readers who dare to dream and explore.</p>
+          <blockquote data-animate="fade-right" data-delay="6">"It's as if the characters themselves asked me to write about them."</blockquote>
+          <a href="shop.html" class="btn btn-primary" data-animate="fade-up" data-delay="7">Get It Now</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel testimonials-section">
+      <div class="testimonials-inner">
+        <div class="testimonials-left" data-animate="fade-right" data-delay="1">
+          <span class="section-label" data-animate="fade-up" data-delay="2">Testimonial</span>
+          <h2 class="section-heading" data-animate="fade-up" data-delay="3">What They Say</h2>
+          <p data-animate="fade-up" data-delay="4">Discover what readers love about Nad Wismar's books&mdash;stories that resonate deeply.</p>
+          <a href="contact.html" class="btn btn-outline" data-animate="fade-up" data-delay="5">Contact Us</a>
+        </div>
+        <div class="testimonials-cards">
+          <div class="testimonial-card" data-animate="fade-left" data-delay="2">
+            <p>Inspiring and entertaining! Each book by Nad Wismar transports you to a different world, leaving you thoughtful and entertained.</p>
+            <div class="testimonial-author">
+              <img src="https://nadwismar.com/wp-content/uploads/2024/08/untitled-42-e1627970884215.jpg" alt="Lorena D Parker" />
+              <span>Lorena D Parker</span>
+            </div>
+          </div>
+          <div class="testimonial-card" data-animate="fade-left" data-delay="4">
+            <p>Tell Me More, My Little Star is a beautifully written novel that stays with you long after you've finished reading.</p>
+            <div class="testimonial-author">
+              <img src="https://nadwismar.com/wp-content/uploads/2024/08/happy-young-handsome-bald-african-man-smiling-with-arms-crossed-e1628009224730.jpg" alt="Ed E Logan" />
+              <span>Ed E Logan</span>
+            </div>
+          </div>
+          <div class="testimonial-card" data-animate="fade-left" data-delay="6">
+            <p>The Glowing Earth is a masterpiece of science fiction. It's not just a book; it's an experience!</p>
+            <div class="testimonial-author">
+              <img src="https://nadwismar.com/wp-content/uploads/2024/08/beautiful-and-confident-e1627947333589.jpg" alt="Emily Thompson" />
+              <span>Emily Thompson</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel whatido-section">
+      <div class="whatido-inner">
+        <div class="whatido-photo" data-animate="zoom-in" data-delay="2">
+          <img src="https://nadwismar.com/wp-content/uploads/2024/08/8f0c847f-8b23-4e09-b406-72efab0270e1.jpeg" alt="Nadwismar" data-parallax="0.04" />
+        </div>
+        <div class="whatido-content" data-animate="fade-left" data-delay="1">
+          <span class="section-label" data-animate="fade-up" data-delay="2">What I Do</span>
+          <h2 class="section-heading" data-animate="fade-up" data-delay="3">Crafting Stories That Inspire</h2>
+          <p class="whatido-intro" data-animate="fade-up" data-delay="4">At Nad Wismar, I craft stories that connect, inspire, and transform. From imaginative sci-fi adventures to insightful self-help guides and heartwarming tales, our books resonate deeply, leaving a lasting impact.</p>
+          <div class="whatido-grid">
+            <div class="whatido-card" data-animate="fade-up" data-delay="3">
+              <div class="whatido-icon">&#9998;</div>
+              <h4>Craft Engaging Stories</h4>
+              <p>Creating immersive stories that captivate and transport readers to new worlds.</p>
+            </div>
+            <div class="whatido-card" data-animate="fade-up" data-delay="4">
+              <div class="whatido-icon">&#128214;</div>
+              <h4>Inspire Through Words</h4>
+              <p>My books inspire, uplift, and connect emotionally with readers.</p>
+            </div>
+            <div class="whatido-card" data-animate="fade-up" data-delay="5">
+              <div class="whatido-icon">&#128161;</div>
+              <h4>Foster Creative Exploration</h4>
+              <p>Encouraging creative thinking and exploration through thought-provoking narratives.</p>
+            </div>
+            <div class="whatido-card" data-animate="fade-up" data-delay="6">
+              <div class="whatido-icon">&#128172;</div>
+              <h4>Connect with Readers</h4>
+              <p>Building a vibrant community by engaging with readers across multiple platforms.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <a href="index.html">
+              <img src="https://nadwismar.com/wp-content/uploads/2024/08/Nadwismar-logo.png" alt="Nadwismar" class="footer-logo" />
+            </a>
+          </div>
+          <div class="footer-col">
+            <h5>Helpful</h5>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Me</a></li>
+              <li><a href="shop.html">Shop</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Useful</h5>
+            <ul>
+              <li><a href="cart.html">Cart</a></li>
+              <li><a href="checkout.html">Checkout</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms &amp; Conditions</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Contact Information</h5>
+            <ul>
+              <li><a href="mailto:nadwismar@gmail.com">nadwismar@gmail.com</a></li>
+              <li><a href="#">+31 6 57704657</a></li>
+            </ul>
+            <div class="social-links">
+              <a href="https://www.tiktok.com/@nad.wismar" target="_blank" rel="noopener">TikTok</a>
+              <a href="https://t.me/nadwismarwriter" target="_blank" rel="noopener">Telegram</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>Copyright &copy; 2024 | <strong>NadWismar</strong> | All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <img id="book-tex-0" src="assets/glowing-earth.png" style="display:none" alt="">
+  <img id="book-tex-1" src="assets/dimensions.png" style="display:none" alt="">
+  <img id="book-tex-2" src="assets/too-good.png" style="display:none" alt="">
+  <img id="book-tex-3" src="assets/little-star.png" style="display:none" alt="">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="cart-system.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

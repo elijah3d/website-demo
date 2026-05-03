@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Glowing Earth - Nadwismar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="space"></canvas>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="https://nadwismar.com/wp-content/uploads/2024/08/Nadwismar-logo.png" alt="Nadwismar" />
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="shop.html">Shop</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="contact.html">Contact Me</a>
+      </nav>
+      <a href="cart.html" class="nav-cart" aria-label="Cart" style="position:relative;">&#128722;<span class="cart-count" style="position:absolute;top:-6px;right:-10px;background:var(--purple);color:#fff;font-size:0.65rem;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center;font-weight:600;">0</span></a>
+      <button class="mobile-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="scroll-container">
+
+    <section class="panel" style="position:relative;">
+      <div class="section-glow" style="top:-100px;right:-100px;"></div>
+      <div class="release-inner">
+        <div class="release-text" data-animate="fade-right">
+          <span class="section-label" data-animate="fade-up" data-delay="1">The Series</span>
+          <h2 class="release-title" data-animate="fade-up" data-delay="2">The Glowing Earth</h2>
+          <span class="price" data-animate="fade-up" data-delay="3">&euro;6.00</span>
+          <small style="display:block;color:var(--text-muted);margin-bottom:1rem;" data-animate="fade-up" data-delay="4">Rated 5.00 out of 5 (1 review)</small>
+          <p data-animate="fade-up" data-delay="5">This autumn was especially warm. The lake was foggy and appealing. It had the power that attracted and gave a dual feeling of peace and unknown expectations as if it had tried to reveal some secrets. The water reflected the glitter of the sunshine, piercing the fast-moving clouds. As the wind blew from the east, it stirred up the forest. Pine peaks had reached the sky, touching the edge of the grayish clouds. Birds were silent.</p>
+          <a href="#" data-add-cart="glowing-earth" class="btn btn-primary" data-animate="fade-up" data-delay="6">Add to Cart</a>
+        </div>
+        <div class="release-image" data-animate="zoom-in">
+          <img src="https://nadwismar.com/wp-content/uploads/2024/08/Untitled_design__4_-removebg-preview.png" alt="The Glowing Earth" data-parallax="0.05" />
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" style="position:relative;">
+      <div class="section-glow" style="bottom:-80px;left:50%;transform:translateX(-50%);"></div>
+      <div style="max-width:700px;width:100%;margin:0 auto;text-align:center;">
+        <h2 class="section-heading center" data-animate="fade-up" data-delay="1">Reviews</h2>
+        <div class="testimonial-card" data-animate="fade-up" data-delay="2" style="max-width:600px;margin:1.5rem auto 0;">
+          <p style="color:var(--cyan);font-style:normal;margin-bottom:0.5rem;">Rated 5 out of 5</p>
+          <p>devcat (verified owner) &ndash; August 28, 2024</p>
+          <p>good</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" style="position:relative;">
+      <div class="section-glow" style="top:50%;right:-80px;transform:translateY(-50%);"></div>
+      <div style="max-width:var(--max-width);width:100%;text-align:center;">
+        <h2 class="section-heading center" data-animate="fade-up" data-delay="1">Related Books</h2>
+        <div class="products-grid" style="max-width:600px;margin:2rem auto 0;">
+          <div class="product-card" data-animate="fade-up" data-delay="2">
+            <a href="product-dimensions.html">
+              <img src="https://nadwismar.com/wp-content/uploads/2026/04/uZPT3lBS7CGD.png" alt="Dimensions" />
+            </a>
+            <h3>Dimensions</h3>
+            <span class="price">&euro;10.00</span>
+          </div>
+          <div class="product-card" data-animate="fade-up" data-delay="3">
+            <a href="product-little-star.html">
+              <img src="https://nadwismar.com/wp-content/uploads/2024/08/Tell-Me-More-My-Little-Star.png" alt="Tell Me More My Little Star" />
+            </a>
+            <h3>Tell Me More My Little Star</h3>
+            <span class="price">&euro;3.00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <a href="index.html">
+              <img src="https://nadwismar.com/wp-content/uploads/2024/08/Nadwismar-logo.png" alt="Nadwismar" class="footer-logo" />
+            </a>
+          </div>
+          <div class="footer-col">
+            <h5>Helpful</h5>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Me</a></li>
+              <li><a href="shop.html">Shop</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Useful</h5>
+            <ul>
+              <li><a href="cart.html">Cart</a></li>
+              <li><a href="checkout.html">Checkout</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms &amp; Conditions</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Contact Information</h5>
+            <ul>
+              <li><a href="mailto:nadwismar@gmail.com">nadwismar@gmail.com</a></li>
+              <li><a href="#">+31 6 57704657</a></li>
+            </ul>
+            <div class="social-links">
+              <a href="https://www.tiktok.com/@nad.wismar" target="_blank" rel="noopener">TikTok</a>
+              <a href="https://t.me/nadwismarwriter" target="_blank" rel="noopener">Telegram</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>Copyright &copy; 2024 | <strong>NadWismar</strong> | All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <img id="book-tex-0" src="assets/glowing-earth.png" style="display:none" alt="">
+  <img id="book-tex-1" src="assets/dimensions.png" style="display:none" alt="">
+  <img id="book-tex-2" src="assets/too-good.png" style="display:none" alt="">
+  <img id="book-tex-3" src="assets/little-star.png" style="display:none" alt="">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="cart-system.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
