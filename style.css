@@ -370,6 +370,26 @@ ul { list-style: none; }
   touch-action: none;
 }
 
+body.planet-locked {
+  overflow: hidden !important;
+  touch-action: none !important;
+}
+
+body.planet-locked .scroll-container {
+  touch-action: none !important;
+}
+
+.planet-scroll-btn {
+  display: none;
+  pointer-events: auto;
+}
+
+@media (max-width: 900px) {
+  .planet-scroll-btn {
+    display: inline-flex;
+  }
+}
+
 .planet-explore-section .planet-explore-ui,
 .planet-explore-section .planet-explore-hint {
   pointer-events: auto;

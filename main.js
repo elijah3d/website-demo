@@ -258,8 +258,10 @@ if (planetSection) {
     planetActive = entries[0].isIntersecting;
     if (planetActive) {
       planetSection.classList.add('active');
+      document.body.classList.add('planet-locked');
     } else {
       planetSection.classList.remove('active');
+      document.body.classList.remove('planet-locked');
       isDragging = false;
     }
   }, { threshold: 0.35 });
@@ -408,13 +410,13 @@ document.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
 document.addEventListener('mouseup', (e) => handleUp(e.clientX, e.clientY));
 
 document.addEventListener('touchstart', (e) => {
-  if (e.touches.length === 1) {
+  if (planetActive && e.touches.length === 1) {
+    e.preventDefault();
     handleDown(e.touches[0].clientX, e.touches[0].clientY, true);
-    if (isDragging) e.preventDefault();
   }
 }, { passive: false });
 document.addEventListener('touchmove', (e) => {
-  if (isDragging && e.touches.length === 1) {
+  if (planetActive && isDragging && e.touches.length === 1) {
     e.preventDefault();
     handleMove(e.touches[0].clientX, e.touches[0].clientY);
   }
@@ -442,6 +444,21 @@ const mobileToggle = document.querySelector('.mobile-toggle');
 const mainNav = document.querySelector('.main-nav');
 if (mobileToggle && mainNav) {
   mobileToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+}
+
+// ─── PLANET SCROLL PAST BUTTON ───
+const planetScrollBtn = document.getElementById('planetScrollBtn');
+if (planetScrollBtn && planetSection) {
+  planetScrollBtn.addEventListener('click', () => {
+    const nextSection = planetSection.nextElementSibling;
+    if (nextSection && nextSection.tagName === 'DIV') {
+      nextSection = nextSection.nextElementSibling;
+    }
+    if (nextSection) {
+      document.body.classList.remove('planet-locked');
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
 }
 
 // ─── ANIMATION ───
