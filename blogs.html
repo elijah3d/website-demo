@@ -81,6 +81,12 @@
       color: var(--purple);
       font-weight: 500;
     }
+    @media (max-width: 520px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-card { min-height: auto; padding: 1.25rem; }
+      .blog-card h3 { font-size: 0.9rem; }
+      .blog-excerpt { font-size: 0.85rem; }
+    }
   </style>
 </head>
 <body>

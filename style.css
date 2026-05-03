@@ -812,6 +812,11 @@ blockquote {
   background: radial-gradient(circle, rgba(157, 0, 255, 0.08), transparent 70%);
   pointer-events: none;
   z-index: 0;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .section-glow { display: block; }
 }
 
 /* ─── RESPONSIVE ─── */
@@ -838,6 +843,18 @@ blockquote {
   .story-image,
   .whatido-photo {
     flex: 0 0 auto;
+    max-width: 350px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-image img,
+  .about-photo img,
+  .release-image img,
+  .story-image img,
+  .whatido-photo img {
+    max-width: 280px;
+    margin: 0 auto;
   }
 
   .hero-desc,
@@ -860,6 +877,18 @@ blockquote {
     border-top: 3px solid var(--purple);
     padding-left: 0;
     padding-top: 1rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+  }
+
+  .release-title {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+  }
+
+  .section-heading {
+    font-size: clamp(1.5rem, 5vw, 2.4rem);
   }
 }
 
@@ -889,12 +918,88 @@ blockquote {
   .whatido-grid { grid-template-columns: 1fr; }
 
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+  .book-row {
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .book-row img {
+    height: 140px;
+  }
+
+  .site-footer { padding: 2rem 1.25rem 1.5rem; }
+
+  .header-inner { padding: 0.8rem 1.25rem; }
+
+  .logo img { height: 32px; }
 }
 
 @media (max-width: 520px) {
-  .products-grid { grid-template-columns: 1fr; }
+  body { font-size: 15px; }
+
+  .panel { padding: 4rem 1rem 2.5rem; }
+
+  .products-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+  .product-card {
+    padding: 1rem;
+  }
+
+  .product-card img {
+    height: 160px;
+  }
+
+  .product-card h3 {
+    font-size: 0.8rem;
+  }
+
   .footer-grid { grid-template-columns: 1fr; }
-  .book-row { justify-content: center; }
+
+  .book-row { justify-content: center; flex-wrap: wrap; }
+
+  .book-row img {
+    height: 120px;
+  }
+
+  .hero-title {
+    font-size: clamp(1.6rem, 8vw, 2.4rem);
+  }
+
+  .section-heading {
+    font-size: clamp(1.3rem, 6vw, 2rem);
+  }
+
+  .release-title {
+    font-size: clamp(1.8rem, 10vw, 3rem);
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+  }
+
+  .whatido-card {
+    padding: 1.25rem;
+  }
+
+  .testimonial-card {
+    padding: 1.25rem;
+  }
+
+  .about-text p,
+  .story-text p,
+  .release-text p {
+    font-size: 0.9rem;
+  }
+
+  .planet-explore-ui .section-heading {
+    font-size: clamp(1.3rem, 5vw, 2rem);
+  }
 }
 
 ::selection {
