@@ -338,13 +338,16 @@ function updateNDC(x, y) {
   mouseNDC.y = -(y / window.innerHeight) * 2 + 1;
 }
 
-function handleDown(x, y) {
+let isTouchDevice = false;
+
+function handleDown(x, y, isTouch) {
   if (!planetActive) return;
+  if (isTouch) isTouchDevice = true;
   updateNDC(x, y);
   raycaster.setFromCamera(mouseNDC, camera);
   const hits = raycaster.intersectObject(planet, false);
   const bookHits = raycaster.intersectObjects(bookMeshes, false);
-  if (hits.length > 0 || bookHits.length > 0) {
+  if (hits.length > 0 || bookHits.length > 0 || (isTouch && planetActive)) {
     isDragging = true;
     dragStart = { x, y };
     dragTotal = 0;
@@ -384,7 +387,8 @@ function handleMove(x, y) {
 }
 
 function handleUp(x, y) {
-  if (isDragging && dragTotal < 6 && planetActive) {
+  const clickThreshold = isTouchDevice ? 15 : 6;
+  if (isDragging && dragTotal < clickThreshold && planetActive) {
     updateNDC(x, y);
     raycaster.setFromCamera(mouseNDC, camera);
     const bookHits = raycaster.intersectObjects(bookMeshes, false);
@@ -397,7 +401,7 @@ function handleUp(x, y) {
 }
 
 document.addEventListener('mousedown', (e) => {
-  handleDown(e.clientX, e.clientY);
+  handleDown(e.clientX, e.clientY, false);
   if (isDragging) e.preventDefault();
 });
 document.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
@@ -406,14 +410,15 @@ document.addEventListener('mouseup', (e) => handleUp(e.clientX, e.clientY));
 canvas.addEventListener('touchstart', (e) => {
   if (e.touches.length === 1) {
     e.preventDefault();
-    handleDown(e.touches[0].clientX, e.touches[0].clientY);
+    handleDown(e.touches[0].clientX, e.touches[0].clientY, true);
   }
 }, { passive: false });
 document.addEventListener('touchmove', (e) => {
-  if (e.touches.length === 1) {
+  if (isDragging && e.touches.length === 1) {
+    e.preventDefault();
     handleMove(e.touches[0].clientX, e.touches[0].clientY);
   }
-});
+}, { passive: false });
 document.addEventListener('touchend', (e) => {
   const t = e.changedTouches[0];
   handleUp(t.clientX, t.clientY);
