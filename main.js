@@ -323,9 +323,12 @@ if (planetSection) {
       if (visible) {
         planetActive = true;
         planetSection.classList.add('planet-focused');
+        canvas.classList.add('planet-canvas-above');
       } else {
         planetActive = false;
         planetSection.classList.remove('planet-focused');
+        canvas.classList.remove('planet-canvas-above');
+        canvas.style.cursor = '';
         isDragging = false;
       }
     }
