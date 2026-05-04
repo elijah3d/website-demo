@@ -254,18 +254,51 @@ const AMBIENT_SCALE = 0.8;
 const ACTIVE_SCALE = 1.6;
 
 if (planetSection) {
+  let savedScrollY = 0;
   const planetObserver = new IntersectionObserver((entries) => {
     planetActive = entries[0].isIntersecting;
     if (planetActive) {
       planetSection.classList.add('active');
       canvas.classList.add('interactive');
+      if (isTouchDevice || 'ontouchstart' in window) {
+        savedScrollY = window.scrollY;
+        document.body.classList.add('planet-locked');
+        document.body.style.top = -savedScrollY + 'px';
+      }
     } else {
       planetSection.classList.remove('active');
       canvas.classList.remove('interactive');
+      if (document.body.classList.contains('planet-locked')) {
+        document.body.classList.remove('planet-locked');
+        document.body.style.top = '';
+        window.scrollTo(0, savedScrollY);
+      }
       isDragging = false;
     }
   }, { threshold: 0.35 });
   planetObserver.observe(planetSection);
+
+  const scrollUp = document.getElementById('planetScrollUp');
+  const scrollDown = document.getElementById('planetScrollDown');
+  if (scrollUp) {
+    scrollUp.addEventListener('click', () => {
+      document.body.classList.remove('planet-locked');
+      document.body.style.top = '';
+      window.scrollTo(0, savedScrollY);
+      const prev = planetSection.previousElementSibling;
+      if (prev) prev.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+  if (scrollDown) {
+    scrollDown.addEventListener('click', () => {
+      document.body.classList.remove('planet-locked');
+      document.body.style.top = '';
+      window.scrollTo(0, savedScrollY);
+      let next = planetSection.nextElementSibling;
+      while (next && next.tagName === 'DIV') next = next.nextElementSibling;
+      if (next) next.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
 }
 
 // ─── SCROLL PROGRESS BAR ───
