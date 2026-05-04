@@ -439,7 +439,6 @@ let isTouchDevice = false;
 
 function handleDown(x, y, isTouch) {
   if (!planetActive) return;
-  if (!isMobileScreen()) return;
   if (isTouch) isTouchDevice = true;
   updateNDC(x, y);
   raycaster.setFromCamera(mouseNDC, camera);
@@ -453,7 +452,6 @@ function handleDown(x, y, isTouch) {
 }
 
 function handleMove(x, y) {
-  if (!isMobileScreen()) return;
   if (isDragging) {
     const dx = x - dragStart.x;
     const dy = y - dragStart.y;
@@ -486,7 +484,6 @@ function handleMove(x, y) {
 }
 
 function handleUp(x, y) {
-  if (!isMobileScreen()) return;
   const clickThreshold = isTouchDevice ? 15 : 6;
   if (isDragging && dragTotal < clickThreshold && planetActive) {
     updateNDC(x, y);
