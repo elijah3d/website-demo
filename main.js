@@ -254,6 +254,10 @@ const ACTIVE_POS = new THREE.Vector3(0, 0, -3);
 const AMBIENT_SCALE = 0.8;
 const ACTIVE_SCALE = 1.1;
 
+function isMobileScreen() {
+  return window.innerWidth <= 768;
+}
+
 if (planetSection) {
   let savedScrollY = 0;
   let planetLocked = false;
@@ -303,16 +307,27 @@ if (planetSection) {
 
   const planetObserver = new IntersectionObserver((entries) => {
     const visible = entries[0].isIntersecting;
-    if (visible && !planetLocked && !planetUnlocking) {
-      planetActive = true;
-      planetSection.classList.add('active');
-      canvas.classList.add('interactive');
-      lockForPlanet();
-    } else if (!visible && !planetLocked) {
-      planetActive = false;
-      planetSection.classList.remove('active');
-      canvas.classList.remove('interactive');
-      isDragging = false;
+    if (isMobileScreen()) {
+      if (visible && !planetLocked && !planetUnlocking) {
+        planetActive = true;
+        planetSection.classList.add('active');
+        canvas.classList.add('interactive');
+        lockForPlanet();
+      } else if (!visible && !planetLocked) {
+        planetActive = false;
+        planetSection.classList.remove('active');
+        canvas.classList.remove('interactive');
+        isDragging = false;
+      }
+    } else {
+      if (visible) {
+        planetActive = true;
+        planetSection.classList.add('planet-focused');
+      } else {
+        planetActive = false;
+        planetSection.classList.remove('planet-focused');
+        isDragging = false;
+      }
     }
   }, { threshold: 0.4 });
   planetObserver.observe(planetSection);
@@ -424,6 +439,7 @@ let isTouchDevice = false;
 
 function handleDown(x, y, isTouch) {
   if (!planetActive) return;
+  if (!isMobileScreen()) return;
   if (isTouch) isTouchDevice = true;
   updateNDC(x, y);
   raycaster.setFromCamera(mouseNDC, camera);
@@ -437,6 +453,7 @@ function handleDown(x, y, isTouch) {
 }
 
 function handleMove(x, y) {
+  if (!isMobileScreen()) return;
   if (isDragging) {
     const dx = x - dragStart.x;
     const dy = y - dragStart.y;
@@ -469,6 +486,7 @@ function handleMove(x, y) {
 }
 
 function handleUp(x, y) {
+  if (!isMobileScreen()) return;
   const clickThreshold = isTouchDevice ? 15 : 6;
   if (isDragging && dragTotal < clickThreshold && planetActive) {
     updateNDC(x, y);
