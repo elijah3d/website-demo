@@ -255,50 +255,71 @@ const ACTIVE_SCALE = 1.6;
 
 if (planetSection) {
   let savedScrollY = 0;
+  let planetLocked = false;
+
+  function lockForPlanet() {
+    savedScrollY = window.scrollY;
+    planetLocked = true;
+  }
+
+  function unlockFromPlanet(targetEl) {
+    planetLocked = false;
+    planetSection.classList.remove('active');
+    canvas.classList.remove('interactive');
+    planetActive = false;
+    isDragging = false;
+    if (targetEl) {
+      setTimeout(() => {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+      }, 50);
+    }
+  }
+
   const planetObserver = new IntersectionObserver((entries) => {
-    planetActive = entries[0].isIntersecting;
-    if (planetActive) {
+    const visible = entries[0].isIntersecting;
+    if (visible && !planetLocked) {
+      planetActive = true;
       planetSection.classList.add('active');
       canvas.classList.add('interactive');
-      if (isTouchDevice || 'ontouchstart' in window) {
-        savedScrollY = window.scrollY;
-        document.body.classList.add('planet-locked');
-        document.body.style.top = -savedScrollY + 'px';
-      }
-    } else {
+      lockForPlanet();
+    } else if (!visible && !planetLocked) {
+      planetActive = false;
       planetSection.classList.remove('active');
       canvas.classList.remove('interactive');
-      if (document.body.classList.contains('planet-locked')) {
-        document.body.classList.remove('planet-locked');
-        document.body.style.top = '';
-        window.scrollTo(0, savedScrollY);
-      }
       isDragging = false;
     }
-  }, { threshold: 0.35 });
+  }, { threshold: 0.4 });
   planetObserver.observe(planetSection);
 
   const scrollUp = document.getElementById('planetScrollUp');
   const scrollDown = document.getElementById('planetScrollDown');
+
   if (scrollUp) {
-    scrollUp.addEventListener('click', () => {
-      document.body.classList.remove('planet-locked');
-      document.body.style.top = '';
-      window.scrollTo(0, savedScrollY);
-      const prev = planetSection.previousElementSibling;
-      if (prev) prev.scrollIntoView({ behavior: 'smooth' });
+    scrollUp.addEventListener('click', (e) => {
+      e.stopPropagation();
+      let prev = planetSection.previousElementSibling;
+      while (prev && prev.classList && !prev.classList.contains('panel')) prev = prev.previousElementSibling;
+      if (!prev) prev = document.querySelector('.scroll-container section:first-child');
+      unlockFromPlanet(prev);
     });
   }
+
   if (scrollDown) {
-    scrollDown.addEventListener('click', () => {
-      document.body.classList.remove('planet-locked');
-      document.body.style.top = '';
-      window.scrollTo(0, savedScrollY);
+    scrollDown.addEventListener('click', (e) => {
+      e.stopPropagation();
       let next = planetSection.nextElementSibling;
       while (next && next.tagName === 'DIV') next = next.nextElementSibling;
-      if (next) next.scrollIntoView({ behavior: 'smooth' });
+      if (!next) next = planetSection.nextElementSibling;
+      unlockFromPlanet(next);
     });
   }
+
+  document.addEventListener('keydown', (e) => {
+    if (!planetLocked) return;
+    if (e.key === 'Escape') {
+      unlockFromPlanet(planetSection.nextElementSibling);
+    }
+  });
 }
 
 // ─── SCROLL PROGRESS BAR ───
@@ -434,13 +455,6 @@ function handleUp(x, y) {
   isDragging = false;
   canvas.style.cursor = hoveredBook ? 'pointer' : '';
 }
-
-document.addEventListener('mousedown', (e) => {
-  handleDown(e.clientX, e.clientY, false);
-  if (isDragging) e.preventDefault();
-});
-document.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
-document.addEventListener('mouseup', (e) => handleUp(e.clientX, e.clientY));
 
 document.addEventListener('mousedown', (e) => {
   handleDown(e.clientX, e.clientY, false);
