@@ -244,7 +244,6 @@ let velY = 0;
 let velX = 0;
 let hoveredBook = null;
 let bookOpacity = 0;
-let bgFade = 1;
 let planetUnlocking = false;
 
 const tooltip = document.getElementById('bookTooltip');
@@ -253,9 +252,9 @@ const planetSection = document.getElementById('section-planet');
 const AMBIENT_POS = new THREE.Vector3(3, -0.5, -5);
 const ACTIVE_POS = new THREE.Vector3(0, 0, -3);
 const AMBIENT_SCALE = 0.8;
-const ACTIVE_SCALE = 2.0;
+const ACTIVE_SCALE = 1.25;
 const AMBIENT_CAM_Z = 5;
-const ACTIVE_CAM_Z = 3;
+const ACTIVE_CAM_Z = 4.2;
 
 if (planetSection) {
   let savedScrollY = 0;
@@ -576,13 +575,6 @@ function animate() {
   ring1.rotation.z = t * 0.04;
   ring2.rotation.z = -t * 0.03;
   atmo.material.opacity = 0.08 + Math.sin(t * 0.8) * 0.03;
-
-  // ─── background fade ───
-  var targetBgFade = planetActive ? 0 : 1;
-  bgFade += (targetBgFade - bgFade) * 0.03;
-  stars.material.opacity = 0.75 * bgFade;
-  nebula.material.opacity = 0.12 * bgFade;
-  stringsGroup.visible = bgFade > 0.01;
 
   // ─── book opacity ───
   var targetBookOp = planetActive ? 1 : 0;

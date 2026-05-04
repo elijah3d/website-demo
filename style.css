@@ -41,7 +41,6 @@ body {
 
 #space.interactive {
   z-index: 2;
-  background: var(--bg);
 }
 
 .book-tooltip {
@@ -386,12 +385,6 @@ ul { list-style: none; }
 .planet-explore-ui {
   text-align: center;
   padding-top: 0.5rem;
-  transition: opacity 0.5s ease;
-}
-
-.planet-explore-section.active .planet-explore-ui {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .planet-explore-hint {
@@ -427,14 +420,15 @@ ul { list-style: none; }
   border: 1px solid var(--surface-border);
   color: var(--text-muted);
   font-family: var(--body-font);
-  font-size: 0.8rem;
-  font-weight: 500;
-  padding: 0.65rem 1.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(12px);
   pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .planet-nav-btn:hover,
@@ -447,6 +441,11 @@ ul { list-style: none; }
 .planet-explore-section.active .planet-mobile-controls {
   display: flex;
   justify-content: center;
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
 }
 
 /* ─── PRODUCTS ─── */
