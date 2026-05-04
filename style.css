@@ -41,6 +41,7 @@ body {
 
 #space.interactive {
   z-index: 2;
+  background: var(--bg);
 }
 
 .book-tooltip {
@@ -104,6 +105,7 @@ ul { list-style: none; }
   background: rgba(7, 6, 13, 0.85);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--surface-border);
+  transition: opacity 0.5s ease;
 }
 
 .header-inner {
@@ -384,6 +386,12 @@ ul { list-style: none; }
 .planet-explore-ui {
   text-align: center;
   padding-top: 0.5rem;
+  transition: opacity 0.5s ease;
+}
+
+.planet-explore-section.active .planet-explore-ui {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .planet-explore-hint {
@@ -436,10 +444,9 @@ ul { list-style: none; }
   background: rgba(157, 0, 255, 0.15);
 }
 
-@media (max-width: 900px) {
-  .planet-mobile-controls {
-    display: flex;
-  }
+.planet-explore-section.active .planet-mobile-controls {
+  display: flex;
+  justify-content: center;
 }
 
 /* ─── PRODUCTS ─── */
@@ -809,6 +816,7 @@ blockquote {
   z-index: 9999;
   width: 0%;
   pointer-events: none;
+  transition: opacity 0.5s ease;
 }
 
 /* ─── REVEAL ANIMATION SYSTEM ─── */

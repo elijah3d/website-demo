@@ -244,6 +244,8 @@ let velY = 0;
 let velX = 0;
 let hoveredBook = null;
 let bookOpacity = 0;
+let bgFade = 1;
+let planetUnlocking = false;
 
 const tooltip = document.getElementById('bookTooltip');
 const planetSection = document.getElementById('section-planet');
@@ -251,7 +253,9 @@ const planetSection = document.getElementById('section-planet');
 const AMBIENT_POS = new THREE.Vector3(3, -0.5, -5);
 const ACTIVE_POS = new THREE.Vector3(0, 0, -3);
 const AMBIENT_SCALE = 0.8;
-const ACTIVE_SCALE = 1.6;
+const ACTIVE_SCALE = 2.0;
+const AMBIENT_CAM_Z = 5;
+const ACTIVE_CAM_Z = 3;
 
 if (planetSection) {
   let savedScrollY = 0;
@@ -260,24 +264,45 @@ if (planetSection) {
   function lockForPlanet() {
     savedScrollY = window.scrollY;
     planetLocked = true;
+    document.body.style.position = 'fixed';
+    document.body.style.top = -savedScrollY + 'px';
+    document.body.style.width = '100%';
+    document.body.style.overflowY = 'scroll';
+    var header = document.querySelector('.site-header');
+    if (header) { header.style.opacity = '0'; header.style.pointerEvents = 'none'; }
+    var prog = document.getElementById('scrollProgress');
+    if (prog) prog.style.opacity = '0';
   }
 
   function unlockFromPlanet(targetEl) {
+    planetUnlocking = true;
     planetLocked = false;
     planetSection.classList.remove('active');
     canvas.classList.remove('interactive');
     planetActive = false;
     isDragging = false;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    document.body.style.overflowY = '';
+    window.scrollTo(0, savedScrollY);
+    var header = document.querySelector('.site-header');
+    if (header) { header.style.opacity = ''; header.style.pointerEvents = ''; }
+    var prog = document.getElementById('scrollProgress');
+    if (prog) prog.style.opacity = '';
     if (targetEl) {
-      setTimeout(() => {
+      setTimeout(function() {
         targetEl.scrollIntoView({ behavior: 'smooth' });
-      }, 50);
+        setTimeout(function() { planetUnlocking = false; }, 600);
+      }, 100);
+    } else {
+      setTimeout(function() { planetUnlocking = false; }, 600);
     }
   }
 
   const planetObserver = new IntersectionObserver((entries) => {
     const visible = entries[0].isIntersecting;
-    if (visible && !planetLocked) {
+    if (visible && !planetLocked && !planetUnlocking) {
       planetActive = true;
       planetSection.classList.add('active');
       canvas.classList.add('interactive');
@@ -552,8 +577,15 @@ function animate() {
   ring2.rotation.z = -t * 0.03;
   atmo.material.opacity = 0.08 + Math.sin(t * 0.8) * 0.03;
 
+  // ─── background fade ───
+  var targetBgFade = planetActive ? 0 : 1;
+  bgFade += (targetBgFade - bgFade) * 0.03;
+  stars.material.opacity = 0.75 * bgFade;
+  nebula.material.opacity = 0.12 * bgFade;
+  stringsGroup.visible = bgFade > 0.01;
+
   // ─── book opacity ───
-  const targetBookOp = planetActive ? 1 : 0;
+  var targetBookOp = planetActive ? 1 : 0;
   bookOpacity += (targetBookOp - bookOpacity) * 0.04;
 
   bookMeshes.forEach((bm, i) => {
@@ -589,6 +621,8 @@ function animate() {
   }
 
   // ─── camera ───
+  var targetCamZ = planetActive ? ACTIVE_CAM_Z : AMBIENT_CAM_Z;
+  camera.position.z += (targetCamZ - camera.position.z) * 0.035;
   camera.position.x += (mouse.x * 0.1 - camera.position.x) * 0.02;
   camera.position.y += (mouse.y * 0.06 - camera.position.y) * 0.02;
   camera.lookAt(0, 0, 0);
