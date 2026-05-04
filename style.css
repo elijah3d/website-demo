@@ -41,6 +41,7 @@ body {
 
 #space.interactive {
   z-index: 2;
+  background: var(--bg);
 }
 
 .book-tooltip {
@@ -407,12 +408,19 @@ ul { list-style: none; }
   color: var(--text-muted);
 }
 
-.planet-mobile-controls {
+.planet-nav-overlay {
   display: none;
+  position: fixed;
+  bottom: 2rem;
+  left: 0;
+  right: 0;
+  justify-content: center;
   gap: 0.75rem;
-  padding-bottom: 1rem;
-  pointer-events: auto;
-  z-index: 60;
+  z-index: 999;
+}
+
+.planet-nav-overlay.visible {
+  display: flex;
 }
 
 .planet-nav-btn {
@@ -427,8 +435,8 @@ ul { list-style: none; }
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(12px);
-  pointer-events: auto;
   -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
 }
 
 .planet-nav-btn:hover,
@@ -436,16 +444,6 @@ ul { list-style: none; }
   border-color: var(--purple);
   color: var(--text-bright);
   background: rgba(157, 0, 255, 0.15);
-}
-
-.planet-explore-section.active .planet-mobile-controls {
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 60;
 }
 
 /* ─── PRODUCTS ─── */

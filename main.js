@@ -252,9 +252,7 @@ const planetSection = document.getElementById('section-planet');
 const AMBIENT_POS = new THREE.Vector3(3, -0.5, -5);
 const ACTIVE_POS = new THREE.Vector3(0, 0, -3);
 const AMBIENT_SCALE = 0.8;
-const ACTIVE_SCALE = 1.25;
-const AMBIENT_CAM_Z = 5;
-const ACTIVE_CAM_Z = 4.2;
+const ACTIVE_SCALE = 1.1;
 
 if (planetSection) {
   let savedScrollY = 0;
@@ -271,6 +269,8 @@ if (planetSection) {
     if (header) { header.style.opacity = '0'; header.style.pointerEvents = 'none'; }
     var prog = document.getElementById('scrollProgress');
     if (prog) prog.style.opacity = '0';
+    var overlay = document.getElementById('planetNavOverlay');
+    if (overlay) overlay.classList.add('visible');
   }
 
   function unlockFromPlanet(targetEl) {
@@ -289,6 +289,8 @@ if (planetSection) {
     if (header) { header.style.opacity = ''; header.style.pointerEvents = ''; }
     var prog = document.getElementById('scrollProgress');
     if (prog) prog.style.opacity = '';
+    var overlay = document.getElementById('planetNavOverlay');
+    if (overlay) overlay.classList.remove('visible');
     if (targetEl) {
       setTimeout(function() {
         targetEl.scrollIntoView({ behavior: 'smooth' });
@@ -613,8 +615,6 @@ function animate() {
   }
 
   // ─── camera ───
-  var targetCamZ = planetActive ? ACTIVE_CAM_Z : AMBIENT_CAM_Z;
-  camera.position.z += (targetCamZ - camera.position.z) * 0.035;
   camera.position.x += (mouse.x * 0.1 - camera.position.x) * 0.02;
   camera.position.y += (mouse.y * 0.06 - camera.position.y) * 0.02;
   camera.lookAt(0, 0, 0);
